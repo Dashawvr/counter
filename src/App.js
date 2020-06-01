@@ -28,7 +28,7 @@ class App extends Component{
     }
 
     subHundred = ()=> {
-        if (this.state.count - 100 <= 0 ){
+        if (this.state.count - 100 < 0 ){
             return this.setState({count: this.state.count})
         }else {
             this.setState({count: this.state.count - 100})

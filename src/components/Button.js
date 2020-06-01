@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 export class Button extends Component {
 
 
-
-
     render() {
         const{subHundred,adderHundred,increment,decrement,reset} = this.props
         return (
