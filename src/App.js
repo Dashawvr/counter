@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import './App.css';
+import {Button}  from './components/Button';
+import Input from './components/Input'
 
 
 class App extends Component{
     state = {
-        count: 0,
-        inputText: ''
+        count: 0
     };
 
     increment = ()=> {
+
         this.setState({count: this.state.count + 1});
     }
 
@@ -26,41 +28,44 @@ class App extends Component{
     }
 
     subHundred = ()=> {
-        if (this.state.count <= 0){
-            return this.setState({
-                count: 0
-            })
+        if (this.state.count - 100 <= 0 ){
+            return this.setState({count: this.state.count})
+        }else {
+            this.setState({count: this.state.count - 100})
         }
-        this.setState({count: this.state.count -100})
     }
 
-    onClick = (e) => {
-     const adder = e.target.elements.input.value
-        e.preventDefault();
-     this.setState({count: this.state.count + parseInt(adder)});
-    }
+
+
     reset = () => {
         this.setState({count: 0});
     }
 
+    onClick = (e) => {
+        const adder = e.target.elements.input.value
+        e.preventDefault();
+        if(parseInt(adder) > 0){
+            this.setState({count: this.state.count + parseInt(adder)});
+        }
 
-render() {
-    return (
-        <div className="App">
-            <button onClick={this.subHundred} className='counter'>Sub 100</button>
-            <button onClick={this.adderHundred} className='counter'>Add 100</button>
-            <h1>{this.state.count}</h1>
-            <button onClick={this.increment} className='counter'>Add 1</button>
-            <button onClick={this.decrement} className='counter'>Sub 1</button>
-            <form onSubmit={this.onClick}>
-                <input type='number' name='input'/>
-                <button type='submit'> add </button>
-            </form>
-            <button onClick={this.reset}>RESET</button>
+    }
 
-        </div>
-    );
-}
+
+    render() {
+
+        return (
+            <div className="App">
+                <Button
+                    subHundred={this.subHundred}
+                    adderHundred={this.adderHundred}
+                    increment={this.increment}
+                    decrement={this.decrement}
+                    reset={this.reset} />
+                <h1>{this.state.count}</h1>
+                <Input onClick={this.onClick}/>
+            </div>
+        );
+    }
 }
 
 export default App;
